@@ -8,9 +8,11 @@
 
 ### Create a New Realm
 
-in this example we are using the `demo-fuse` realm.
+In this example we are using the `demo-fuse` realm.
 
 ### Create a Client for the App
+
+![alt text](documentation/client-config.png "client creation configuration")
 
 ### Change Springboot Configuration
 
