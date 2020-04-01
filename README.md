@@ -16,7 +16,7 @@ In this example we are using the `demo-fuse` realm.
 
 ### Change Springboot Configuration
 
-The application.properties have to be changed. `keycloak.credentials.secret` is generated when you create a new client. To get this value go to the client definition and click in the credentials tab.
+The [application.properties](src/main/resources/application.properties) have to be changed. `keycloak.credentials.secret` is generated when you create a new client. To get this value go to the client definition and click in the credentials tab.
 
     keycloak.realm = demo-fuse
     keycloak.auth-server-url = http://localhost:8080/auth
