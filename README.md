@@ -2,17 +2,27 @@
 
 ## Environment
 - Fuse 7.6
-- Red Hat Single Sign On 7.3
+- Red Hat Single Sign On 7.4
 
 ## How to Configure RH-SSO
 
 ### Create a New Realm
 
-In this example we are using the `demo-fuse` realm.
+Create a new realm named `demo-fuse`.
 
 ### Create a Client for the App
 
 ![alt text](documentation/client-config.png "client creation configuration")
+
+### Create Client Roles
+
+In this example we are using two client roles: admin and common-user
+
+## Create Users
+
+Create users to authenticate and add the created roles to them
+
+## Prepare the app
 
 ### Change Springboot Configuration
 
@@ -28,8 +38,19 @@ The [application.properties](src/main/resources/application.properties) have to 
 
 ## How to Run Locally
 
-    mvn clean -DskipTests spring-boot:run
+    mvn clean spring-boot:run
 
 ## How to Deploy in OpenShift
 
-    mvn clean -DskipTests fabric8:deploy -Popenshift
+    mvn clean fabric8:deploy -Popenshift
+
+## GET ACCESS TOKEN
+
+    export ACCESS_TOKEN=$( curl -s -X POST http://localhost:8180/auth/realms/demo-fuse/protocol/openid-connect/token \
+    --user fuse-app:$SECRET \
+    -H 'content-type: application/x-www-form-urlencoded' \
+    -d 'username=admin&password=admin&grant_type=password' | jq --raw-output '.access_token' )
+
+# TEST CALL
+
+  curl -X GET http://localhost:8083/camel/protected-resource -H "Authorization: Bearer $ACCESS_TOKEN"
