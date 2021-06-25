@@ -6,7 +6,7 @@ import org.springframework.stereotype.Component;
 
 /**
  * A simple Camel REST DSL route that implements the greetings service.
- * 
+ *
  */
 @Component
 public class CamelRouter extends RouteBuilder {
@@ -26,7 +26,7 @@ public class CamelRouter extends RouteBuilder {
                 .apiContextRouteId("doc-api")
             .component("servlet")
             .bindingMode(RestBindingMode.json);
-        
+
         rest("/greetings").description("Greeting to {name}")
             .get("/{name}").outType(Greetings.class)
                 .route().routeId("greeting-api")
@@ -34,7 +34,15 @@ public class CamelRouter extends RouteBuilder {
 
         from("direct:greetingsImpl").description("Greetings REST service implementation route")
             .streamCaching()
-            .to("bean:greetingsService?method=getGreetings");     
+            .to("bean:greetingsService?method=getGreetings");
+
+
+            rest("/protected-resource").description("Greeting to {name}")
+                .get().outType(String.class)
+                    .route()
+                      .routeId("protected-api")
+                      .setBody(constant("this is a protected resource"));
+
         // @formatter:on
     }
 
