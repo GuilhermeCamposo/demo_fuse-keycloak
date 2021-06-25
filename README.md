@@ -46,14 +46,14 @@ The [application.properties](src/main/resources/application.properties) have to 
 
 ## GET TOKEN 
 
-    curl -X POST http://localhost:8180/auth/realms/contact-list/protocol/openid-connect/token \
+    curl -X POST http://localhost:8180/auth/realms/demo-fuse/protocol/openid-connect/token \
     --user fuse-app:$SECRET \
     -H 'content-type: application/x-www-form-urlencoded' \
     -d 'username=admin&password=admin&grant_type=password'
 
 ## GET ACCESS TOKEN 
 
-    export ACCESS_TOKEN=$( curl -s -X POST http://localhost:8180/auth/realms/contact-list/protocol/openid-connect/token \
+    export ACCESS_TOKEN=$( curl -s -X POST http://localhost:8180/auth/realms/demo-fuse/protocol/openid-connect/token \
     --user fuse-app:$SECRET \
     -H 'content-type: application/x-www-form-urlencoded' \
     -d 'username=admin&password=admin&grant_type=password' | jq --raw-output '.access_token' )
