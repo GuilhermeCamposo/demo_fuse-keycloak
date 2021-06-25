@@ -32,7 +32,7 @@ The [application.properties](src/main/resources/application.properties) have to 
     keycloak.auth-server-url = http://localhost:8080/auth
     keycloak.ssl-required = external
     keycloak.resource = fuse-app
-    keycloak.credentials.secret = 7a0e9fbf-7ac3-4ad9-ad59-30891081b61f
+    keycloak.credentials.secret = $SECRET
     keycloak.use-resource-role-mappings = true
 
 
@@ -48,7 +48,11 @@ The [application.properties](src/main/resources/application.properties) have to 
 
 ### Get Access Token
 
-    export ACCESS_TOKEN=$( curl -s -X POST http://localhost:8180/auth/realms/demo-fuse/protocol/openid-connect/token \
+   export SECRET=
+   export KEYCLOAK_URL=http://keycloak-http-rhsso.apps.cluster-b596.b596.example.opentlc.com
+
+
+    export ACCESS_TOKEN=$( curl -s -X POST $KEYCLOAK_URL/auth/realms/demo-fuse/protocol/openid-connect/token \
     --user fuse-app:$SECRET \
     -H 'content-type: application/x-www-form-urlencoded' \
     -d 'username=admin&password=admin&grant_type=password' | jq --raw-output '.access_token' )
