@@ -55,4 +55,4 @@ The [application.properties](src/main/resources/application.properties) have to 
 
 ### Test Call
 
-  curl -X GET http://localhost:8083/camel/protected-resource -H "Authorization: Bearer $ACCESS_TOKEN"
+    curl -X GET http://localhost:8083/camel/protected-resource -H "Authorization: Bearer $ACCESS_TOKEN"
