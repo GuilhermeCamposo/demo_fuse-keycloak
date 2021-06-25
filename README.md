@@ -42,17 +42,17 @@ The [application.properties](src/main/resources/application.properties) have to 
 
     mvn clean spring-boot:run
 
-## How to Deploy in OpenShift
+### How to Deploy in OpenShift
 
     mvn clean fabric8:deploy -Popenshift
 
-## Get Access Token
+### Get Access Token
 
     export ACCESS_TOKEN=$( curl -s -X POST http://localhost:8180/auth/realms/demo-fuse/protocol/openid-connect/token \
     --user fuse-app:$SECRET \
     -H 'content-type: application/x-www-form-urlencoded' \
     -d 'username=admin&password=admin&grant_type=password' | jq --raw-output '.access_token' )
 
-# Test Call
+### Test Call
 
   curl -X GET http://localhost:8083/camel/protected-resource -H "Authorization: Bearer $ACCESS_TOKEN"
