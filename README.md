@@ -18,11 +18,11 @@ Create a new realm named `demo-fuse`.
 
 In this example we are using two client roles: admin and common-user
 
-## Create Users
+### Create Users
 
 Create users to authenticate and add the created roles to them
 
-## Prepare the app
+## Prepare The App
 
 ### Change Springboot Configuration
 
@@ -36,7 +36,9 @@ The [application.properties](src/main/resources/application.properties) have to 
     keycloak.use-resource-role-mappings = true
 
 
-## How to Run Locally
+## Testing
+
+### Run the App
 
     mvn clean spring-boot:run
 
@@ -44,13 +46,13 @@ The [application.properties](src/main/resources/application.properties) have to 
 
     mvn clean fabric8:deploy -Popenshift
 
-## GET ACCESS TOKEN
+## Get Access Token
 
     export ACCESS_TOKEN=$( curl -s -X POST http://localhost:8180/auth/realms/demo-fuse/protocol/openid-connect/token \
     --user fuse-app:$SECRET \
     -H 'content-type: application/x-www-form-urlencoded' \
     -d 'username=admin&password=admin&grant_type=password' | jq --raw-output '.access_token' )
 
-# TEST CALL
+# Test Call
 
   curl -X GET http://localhost:8083/camel/protected-resource -H "Authorization: Bearer $ACCESS_TOKEN"
