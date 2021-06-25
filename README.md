@@ -44,18 +44,13 @@ The [application.properties](src/main/resources/application.properties) have to 
 
     mvn clean fabric8:deploy -Popenshift
 
-## GET TOKEN 
-
-    curl -X POST http://localhost:8180/auth/realms/demo-fuse/protocol/openid-connect/token \
-    --user fuse-app:$SECRET \
-    -H 'content-type: application/x-www-form-urlencoded' \
-    -d 'username=admin&password=admin&grant_type=password'
-
-## GET ACCESS TOKEN 
+## GET ACCESS TOKEN
 
     export ACCESS_TOKEN=$( curl -s -X POST http://localhost:8180/auth/realms/demo-fuse/protocol/openid-connect/token \
     --user fuse-app:$SECRET \
     -H 'content-type: application/x-www-form-urlencoded' \
     -d 'username=admin&password=admin&grant_type=password' | jq --raw-output '.access_token' )
 
+# TEST CALL
 
+  curl -X GET http://localhost:8083/camel/protected-resource -H "Authorization: Bearer $ACCESS_TOKEN"
