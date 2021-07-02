@@ -1,4 +1,4 @@
-# Fuse 7.6 With Keycloak Adapter Example
+# Fuse With Keycloak Adapter Example
 
 ## Environment
 - Fuse 7.6
@@ -53,4 +53,4 @@ The [application.properties](src/main/resources/application.properties) have to 
 
 # TEST CALL
 
-  curl -X GET http://localhost:8083/camel/protected-resource -H "Authorization: Bearer $ACCESS_TOKEN"
+    curl -X GET http://localhost:8083/camel/protected-resource -H "Authorization: Bearer $ACCESS_TOKEN"
